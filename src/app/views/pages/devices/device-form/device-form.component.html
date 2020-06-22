@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>Form</strong>
+      </div>
+      <div class="card-body">
+        <form #f="ngForm" (ngSubmit)="submit(f)">
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="deviceName">Device Name</label>
+              <input type="text" class="form-control" id="deviceName" name="deviceName" placeholder="Enter your name"
+                [(ngModel)]="model.deviceName" #deviceName="ngModel" required />
+
+              <div class="form-error-messages" *ngIf="
+                  deviceName.errors && (deviceName.dirty || deviceName.touched)
+                ">
+                <p *ngIf="deviceName.errors.required">
+                  Device Name is required
+                </p>
+              </div>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="deviceType">Device Type</label>
+              <input type="text" class="form-control" id="deviceType" name="deviceType" placeholder="Enter your email"
+                [(ngModel)]="model.deviceType" required #deviceType="ngModel" />
+
+              <div class="form-error-messages" *ngIf="
+                  deviceType.errors && (deviceType.dirty || deviceType.touched)
+                ">
+                <p *ngIf="deviceType.errors.required">
+                  Device Type is required
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="osVersion">OS Version</label>
+              <input type="text" class="form-control" id="osVersion" placeholder="Enter phone number" name="osVersion"
+                [(ngModel)]="model.osVersion" #osVersion="ngModel" required />
+              <div class="form-error-messages" *ngIf="
+                  osVersion.errors && (osVersion.dirty || osVersion.touched)
+                ">
+                <p *ngIf="osVersion.errors.required">
+                  OS Version is required
+                </p>
+              </div>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="lastLoggedinTime">Last Loggedin Time</label>
+              <input type="date" class="form-control" id="lastLoggedinTime" name="lastLoggedinTime"
+                placeholder="Enter address" [(ngModel)]="model.lastLoggedinTime" #lastLoggedinTime="ngModel" required />
+
+              <div class="form-error-messages" *ngIf="
+                  lastLoggedinTime.errors &&
+                  (lastLoggedinTime.dirty || lastLoggedinTime.touched)
+                ">
+                <p *ngIf="lastLoggedinTime.errors.required">
+                  Address is required
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col width-80">
+              <button type="submit" class="btn btn-primary custom-btn" [disabled]="f.invalid">
+                {{ deviceId === '' ? 'Save' : 'Update' }}
+              </button>
+              <button type="button" class="btn btn-secondary custom-btn" (click)="cancel()">
+                Cancel
+              </button>
+            </div>
+
+            <div class="col width-20 text-right" *ngIf="deviceId != ''">
+              <i class="fa fa-trash hand custom-icon" aria-hidden="true" (click)="myModal.show()"></i>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete</h4>
+        <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="myModal.hide()">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="delete()">
+          Delete
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--/.col-->

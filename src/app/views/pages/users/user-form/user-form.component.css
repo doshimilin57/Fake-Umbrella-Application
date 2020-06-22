@@ -1,0 +1,12 @@
+input.ng-touched.ng-invalid,
+input.ng-dirty.ng-invalid {
+  border: 1px solid #d74e48; /* red */
+}
+.form-error-messages {
+  color: #d74e48;
+  font-size: 11px;
+}
+.form-error-messages p {
+  padding: 0px;
+  margin: 0px;
+}

@@ -1,0 +1,64 @@
+<div class="manage-roles__main">
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="search-form">
+        <div class="form-group">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 col-xs-12 text-right custom">
+
+    </div>
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="chartError">
+    {{chartErrorMsg}}
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <ngx-datatable #myTable [rows]="rows" class="bootstrap table-bordered hand" [columns]="columns"
+              [headerHeight]="50" [columnMode]="'force'" [rowHeight]="50" [scrollbarV]="" [scrollbarH]="true"
+              footerHeight="50" [limit]="8" [sorts]="" (activate)="onActivate($event)">
+              <ngx-datatable-column prop="name" name="Name"> </ngx-datatable-column>
+              <ngx-datatable-column prop="person_contact" name="Person of contact"></ngx-datatable-column>
+              <ngx-datatable-column prop="phone" name="Telephone Number"> </ngx-datatable-column>
+              <ngx-datatable-column prop="rain" name="Rain" [cellClass]="'my-rain'">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <b> {{ row.rain }}</b>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column prop="rain_dates" name="Date & Time">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row?.rain_dates | date:'medium' || '-' }}
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          Top customers
+          <div class="card-header-actions">
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-wrapper">
+            <canvas baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels"
+              [colors]="barChartColors" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"
+              (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
